@@ -90,6 +90,8 @@ mkdir -p libraries
 mkdir -p launcher-libraries
 mkdir -p modules
 mkdir -p launcher-modules
+mkdir -p updates
+chmod +rx updates
 if test -f launchserver_args.txt
 then
     true

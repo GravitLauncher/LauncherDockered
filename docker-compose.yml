@@ -2,11 +2,22 @@ services:
     gravitlauncher:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.launcher
         restart: always
         stdin_open: true
         tty: true
         volumes:
         - launcher:/app/data
+    nginx:
+        build:
+            context: .
+            dockerfile: Dockerfile.nginx
+        restart: always
+        volumes:
+            - launcher:/volume
+        ports:
+            - 17549:80
+        depends_on:
+            - gravitlauncher
 volumes:
     launcher:
