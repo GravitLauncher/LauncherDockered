@@ -1,0 +1,12 @@
+services:
+    gravitlauncher:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        stdin_open: true
+        tty: true
+        volumes:
+        - launcher:/app/data
+volumes:
+    launcher:

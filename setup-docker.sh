@@ -86,19 +86,23 @@ chmod +x install_launcher_module.sh
 
 cat <<EOF > start.sh
 #!/bin/bash
-cd data
 mkdir -p libraries
 mkdir -p launcher-libraries
 mkdir -p modules
 mkdir -p launcher-modules
-touch launchserver_args.txt
+if test -f launchserver_args.txt
+then
+    true
+else
+    echo '-Xmx512M' > launchserver_args.txt
+fi
 if test -f runtime
 then
     true
 else
     cp -r ../runtime runtime
 fi
-java -Xmx512M -Dlaunchserver.dir.libraries=../libraries -Dlaunchserver.dir.launcher-libraries=../launcher-libraries -Dlaunchserver.dir.modules=../modules -Dlaunchserver.dir.launcher-modules=../launcher-modules -Dlauncher.useSlf4j=true -jar ../LaunchServer.jar \$@
+exec java -Xmx512M -Dlaunchserver.dir.libraries=../libraries -Dlaunchserver.dir.launcher-libraries=../launcher-libraries -Dlaunchserver.dir.modules=../modules -Dlaunchserver.dir.launcher-modules=../launcher-modules -Dlauncher.useSlf4j=true -jar ../LaunchServer.jar \$@
 EOF
 chmod +x start.sh
 echo -e "\033[32mPhase 4: \033[33mDelete source files\033[m";

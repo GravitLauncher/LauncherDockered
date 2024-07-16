@@ -6,6 +6,7 @@ RUN apt-get update && apt-get -y install git unzip curl wget osslsigncode && \
     cp javafx-jmods-22.0.1/* /opt/java/openjdk/jmods && \
     rm -r javafx-jmods-22.0.1 && \
     rm -rf openjfx-22.0.1_linux-x64_bin-jmods.zip
+FROM setup AS launchserver
 COPY setup-docker.sh .
 RUN chmod +x setup-docker.sh && \
     ./setup-docker.sh && \
