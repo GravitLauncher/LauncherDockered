@@ -13,5 +13,5 @@ RUN chmod +x setup-docker.sh && \
     rm -rf ~/.gradle # Clear gradle cache
 WORKDIR /app/data
 VOLUME /app/data
-EXPOSE 9270
+EXPOSE 9274
 ENTRYPOINT ["/app/start.sh"]
