@@ -57,7 +57,7 @@ if [ \$# -eq 0 ]; then
     >&2 echo "Usage: install_launchserver_module.sh MODULE_NAME"
     exit 1
 fi
-MODULE_FILE="compat/launchserver-modules/$1_module.jar"
+MODULE_FILE="compat/launchserver-modules/\$1_module.jar"
 if test -f \$MODULE_FILE
 then
     ln -s ../../\$MODULE_FILE data/modules/\$1_module.jar
