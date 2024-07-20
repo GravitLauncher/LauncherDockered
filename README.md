@@ -32,3 +32,28 @@
 - Выполните команду `docker compose up -d --build`
 - Если вы не меняли папку рантайма вы можете удалить папку `/app/data/runtime` и перезапустить лаунчсервер что бы она обновилась
 
+## Настройка nginx
+
+По умолчания лаунчсервер с настроенным nginx доступен по адресу `http://localhost:17549`. Если у вас есть сайт на этой машине с настроенным nginx используйте следующий конфиг (конфиг предоставлен для http, при необходимости добавьте туда параметры для ssl):
+
+
+```nginx
+server {
+    listen 80;
+
+    charset utf-8;
+    #access_log  /var/log/nginx/launcher.access.log;
+    #error_log  /var/log/nginx/launcher.error.log notice;
+
+    location / {
+        proxy_pass http://127.0.0.1:17549;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+
+```
