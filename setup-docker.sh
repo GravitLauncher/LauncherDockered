@@ -60,7 +60,7 @@ if [ \$# -eq 0 ]; then
     exit 1
 fi
 MODULE_FILE="compat/launchserver-modules/\$1_module.jar"
-if test -f \$MODULE_FILE
+if test -f /app/\$MODULE_FILE
 then
     ln -s /app/\$MODULE_FILE /app/data/modules/\$1_module.jar
 else
@@ -77,7 +77,7 @@ if [ \$# -eq 0 ]; then
     exit 1
 fi
 MODULE_FILE="compat/launcher-modules/\$1_lmodule.jar"
-if test -f \$MODULE_FILE
+if test -f /app/\$MODULE_FILE
 then
     ln -s /app/\$MODULE_FILE /app/data/launcher-modules/\$1_lmodule.jar
 else
