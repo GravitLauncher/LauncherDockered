@@ -12,8 +12,10 @@ which git || ( echo -e "\033[31mCheck failed: git not found. Please install git\
 
 (javac -version | grep " 21") || ( echo -e "\033[31mCheck failed: javac version unknown. Supported Java 21+. Please install JDK 21: \033[32https://gravitlauncher.com/install\033[m" && exit 1 );
 
+echo -e "\033[32mLauncher branch: \033[33m$BRANCH\033[m"
+
 echo -e "\033[32mPhase 1: \033[33mClone main repository\033[m";
-git clone -b $BRANCH  https://github.com/GravitLauncher/Launcher.git src;
+git clone -b $BRANCH https://github.com/GravitLauncher/Launcher.git src;
 cd src;
 sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules;
 git submodule sync;
@@ -60,7 +62,7 @@ fi
 MODULE_FILE="compat/launchserver-modules/\$1_module.jar"
 if test -f \$MODULE_FILE
 then
-    ln -s ../../\$MODULE_FILE data/modules/\$1_module.jar
+    ln -s /app/\$MODULE_FILE /app/data/modules/\$1_module.jar
 else
     echo \$MODULE_FILE not exist
 fi
@@ -77,7 +79,7 @@ fi
 MODULE_FILE="compat/launcher-modules/\$1_lmodule.jar"
 if test -f \$MODULE_FILE
 then
-    ln -s ../../\$MODULE_FILE data/launcher-modules/\$1_lmodule.jar
+    ln -s /app/\$MODULE_FILE /app/data/launcher-modules/\$1_lmodule.jar
 else
     echo \$MODULE_FILE not exist
 fi
