@@ -1,7 +1,7 @@
 #!/bin/bash -e
 set -e
-BRANCH=dev
-RUNTIME_BRANCH=dev
+BRANCH=v5.6.4
+RUNTIME_BRANCH=v4.0.3
 
 echo -e "\033[32mPhase 0: \033[33mChecking\033[m";
 
@@ -15,7 +15,7 @@ which git || ( echo -e "\033[31mCheck failed: git not found. Please install git\
 echo -e "\033[32mLauncher branch: \033[33m$BRANCH\033[m"
 
 echo -e "\033[32mPhase 1: \033[33mClone main repository\033[m";
-git clone -b $BRANCH https://github.com/GravitLauncher/Launcher.git src;
+git clone --depth 1 -b $BRANCH https://github.com/GravitLauncher/Launcher.git src;
 cd src;
 sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules;
 git submodule sync;
@@ -27,7 +27,7 @@ mkdir libraries;
 mkdir launcher-libraries;
 mkdir launcher-libraries-compile;
 echo -e "\033[32mPhase 3: \033[33mClone runtime repository\033[m";
-git clone -b $RUNTIME_BRANCH https://github.com/GravitLauncher/LauncherRuntime.git srcRuntime;
+git clone --depth 1 -b $RUNTIME_BRANCH https://github.com/GravitLauncher/LauncherRuntime.git srcRuntime;
 cd srcRuntime;
 ./gradlew -Dorg.gradle.daemon=false assemble || ( echo -e "\033[31mBuild failed. Stopping\033[m" && exit 100 );
 cd ..;
