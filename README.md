@@ -1,1 +1,32 @@
 # Launcher in Docker
+Команды для работы с GravitLauncher в Docker:
+- `docker compose up -d --build` установить/обновить лаунчсервер
+- `docker compose up -d` обновить настройки в docker.compose.yml без пересборки
+- `docker compose attach gravitlauncher` подключится к консоли лаунчсервера (**вы не будете видеть предыдущие логи**)
+- `docker compose logs gravitlauncher` посмотреть логи лаунчсервера
+- `docker compose stop` остановить лаунчсервер
+- `docker compose start` запустить лаунчсервер
+- `docker compose down` удалить контейнеры (данные updates, конфигурация сохранятся в volume)
+- `docker compose down -v` полностью удалить лаунчсервер вместе с данными
+- `docker compose ps` просмотреть статус
+- `docker compose stats` посмотреть общее потребление лаунчсервера (CPU/Memory/Disk)
+- `docker compose exec gravitlauncher /app/install_launchserver_module.sh MODULE_NAME` установить модуль для лаунчсервера
+- `docker compose exec gravitlauncher /app/install_launcher_module.sh MODULE_NAME` установить модуль для лаунчера
+- `docker compose exec gravitlauncher /bin/bash` войти в консоль bash
+- `docker compose cp gravitlauncher:SRCPATH DSTPATH` скопировать файл SRCPATH из контейнера в DSTPATH (на хост машину)
+- `docker compose cp SRCPATH gravitlauncher:DSTPATH` скопировать файл SRCPATH в DSTPATH в контейнере (из хост машины)
+
+
+## Структура контейнера
+
+Контейнер лаунчсервера содержит в себе jdk 21, vim/nano, osslsigncode и javafx. Вы можете использовать все стандартные команды если вдруг они вам нужны. Процесс лаунчсервера внутри контейнера всегда имеет PID 1
+При обновлении лаунчсервера модули установленные скриптами install_launchserver_module.sh и install_launcher_module.sh обновятся автоматически. Модуль рантайма так же обновится автоматически, но папка runtime - нет.
+Файлы контейнера находятся в /app, а рабочая директория (workdir) в /app/data
+
+
+## Обновление лаунчсервера
+
+- Убедитиесь что в `setup-docker.sh` указана нужная вам ветка/версия
+- Выполните команду `docker compose up -d --build`
+- Если вы не меняли папку рантайма вы можете удалить папку `/app/data/runtime` и перезапустить лаунчсервер что бы она обновилась
+
