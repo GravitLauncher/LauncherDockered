@@ -1,7 +1,7 @@
 #!/bin/bash -e
 set -e
-BRANCH=v5.6.8
-RUNTIME_BRANCH=v4.0.5
+BRANCH=v5.6.9
+RUNTIME_BRANCH=v4.0.6
 
 echo -e "\033[32mPhase 0: \033[33mChecking\033[m";
 

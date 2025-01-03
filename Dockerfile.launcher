@@ -1,6 +1,6 @@
 FROM eclipse-temurin:21 AS setup
 WORKDIR /app
-RUN apt-get update && apt-get -y install git unzip curl wget osslsigncode vim nano && \
+RUN apt-get update && apt-get -y install git unzip curl wget osslsigncode vim socat nano && \
     rm -rf /var/lib/apt/lists/* && \
     wget https://download2.gluonhq.com/openjfx/22.0.2/openjfx-22.0.2_linux-x64_bin-jmods.zip && \
     unzip openjfx-22.0.2_linux-x64_bin-jmods.zip && \
