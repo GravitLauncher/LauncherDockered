@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21 AS setup
+FROM eclipse-temurin:21-noble AS setup
 WORKDIR /app
 RUN apt-get update && apt-get -y install git unzip curl wget osslsigncode vim socat nano && \
     rm -rf /var/lib/apt/lists/* && \
