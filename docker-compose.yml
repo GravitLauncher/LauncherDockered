@@ -5,7 +5,7 @@ services:
         stdin_open: true
         tty: true
         volumes:
-        - launcher:/app/data
+        - ./launcher:/app/data
         environment:
             ADDRESS: "localhost:17549"
             PROJECTNAME: "GravitLauncher"
