@@ -1,6 +1,6 @@
 services:
   gravitlauncher:
-    image: ghcr.io/gravitlauncher/launcher:v5.7.13
+    image: ghcr.io/gravitlauncher/launcher:v5.7.14
     restart: always
     stdin_open: true
     tty: true
